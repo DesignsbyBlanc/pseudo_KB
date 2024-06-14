@@ -28,39 +28,23 @@ const BlockNote = () => {
 	async function saveToStorage(jsonBlocks: Block[]) {
 		// Save contents to local storage. You might want to debounce this or replace
 		// with a call to your API / database.
-		setLiveBlockyData({ editorContent: JSON.stringify(jsonBlocks) });
+		setLiveBlockyData({ editorContent: jsonBlocks });
 		console.log("Save:", liveBlockyData.editorContent);
 
-		fetch(
-			"https://expert-bassoon-wrrvqqxp4qvf9w74-8000.app.github.dev/api/blocknotes/1",
-			{
-				headers: {
-					accept: "text/html; q=1.0, */*",
-					"accept-language": "en-US,en;q=0.6",
-					"cache-control": "no-cache",
-					"content-type": "application/json",
-					pragma: "no-cache",
-					priority: "u=1, i",
-					"sec-ch-ua":
-						'"Brave";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
-					"sec-ch-ua-mobile": "?0",
-					"sec-ch-ua-platform": '"macOS"',
-					"sec-fetch-dest": "empty",
-					"sec-fetch-mode": "cors",
-					"sec-fetch-site": "same-origin",
-					"sec-gpc": "1",
-					"x-csrftoken":
-						"SjazIqxSINninLIFCX7oXYdIDDDAcbJztNL0A97NUoWl6Nlnrr4WNRvnVWMVkqyA",
-					"x-requested-with": "XMLHttpRequest",
-					cookie: "csrftoken=LELB2TK5mLJdTcNSZE7I03sPstjvipZb; tunnel_phishing_protection=new-horse-5l5wmkw.use2; tabstyle=raw-tab; .Tunnels.Relay.WebForwarding.Cookies=CfDJ8E0FHi1JCVNKrny-ARCYWxNvuGfQ5VhoLO-YaYt8SOsmQCn4Fm6TgtZF8bvL9_Wd9arx_cB5yHoSat16ksC1rhfaMKnxgcovL4QgqZr-ZZ-CQHP0DeTFYOAE3JVcLAtp8O-hXaHOCWyv7vwqXo5pjSTR3691PaVR5KiQOKPlA4d4vWF53QH5T1Pit-38zuSCtIl3_lnCrQ4BclHJc1tmi_tkbRTQK_5IUjVlj9RR4il7eSqAH9UypoIt0-MaHr9QuCygIlWl5CrlAAAZoxceTYK-zG0b11FXv4mTtY5juSzhqbYXExUDiB5dYZZtmSBpW0PHxyaXp4fLWTXbuqgqLAb1P7aJ1jQMEuBVXeYwWwmdLSr5-LaKOuxcsroUQoUUqpUGUvebi7k3YXz5pIsDvBdKBu4umG5LgPdE9ordi9i8pvR0xOqhsYl6p8S4j7DsryjHxjNoZWyOHiMCmxW_cArgFN_UZ94dYUSGf0TMjD5fyFrScyvarmMmXCBaOkqfqLsjiRVrkHhfyjGdAx39jcdmKIS3hyzkeA1CzgA0rfYkeKoj4Cw_T7or8usSOjHCqBr7PvVw0Ad6l3kzsz0MgBjXq59NocVUIUQbkTGvzrxux4SLEdK7Y9HK0-moY96TjxVpQLe00o1VGnFqKGbTJoVBXabq6KTvvbH3hzzmdZn2oL6CffzQnXQXHlIxlmY-ZQ4vS1dmGpZOB-LY6to8oCvO-_LaSSvbg0AhWP_KOWvU47-vS-460xPWOnQ3gBYXA1r_6JpXfXTTnaMKDYI0_kPirZt5kLTWQ4zVI-i5cUPFxACy4VfxzTFRCeeL28jN0JZ6SSWGyXYmA2tUeGnB-qEkFsn0d0GhzPG-16ic240YCUoFk00_-zf-pnUoj5skT_cwx-9m7sMZloxplrfa3A76EBxQLhAgzYtkoQqkjFfEa26ZfvP9skh9pe12qIengZBP_V0Qx48_56FGMr41jWO5HU3rn8GSfVk2RsGe67nxfIWLSQzPoWEnxjjXEmPqxYAq2OkWSGKG8r7r9v3cu1FkzHgn289AQcGMiMY1VZ_UlrKvJQViKMdpzvAZ5sZsEeavyLX5QAPd0DwjDPF3B6T7uQP4AXNCCCtUXeWGhdAr4Rem1QT1xqLE9_2Yocc7prtoPVlMXnxqV5LJBuTAgobO4la9iTyaasiZvcmjHUI-6VrzFtGUcIbhnn-EAqaKnl2XCgZLxUYvDIzO30SF-7COqwp25eb4CtpMY7N6Wj-PP7ttWEYmL3sR9aG0_Nm29fSfQFmEMO8EyB1mLy_Hn4sYgU3rqGW7s2Hzhrdh1CuZWeg4-yPENP0d6dEJNq_NO2zut-H0hrSbzUWLM8LeRPwwPr2q_znsCNOX2SPIpRLryj-fayGE3iqflfAXgd_r_oX3-MlwWuD087trh7syF4R3CAXSaOE45rIoOt8Qcy_lLP_LQiiHgwBN02SOsFo3bh0tWHQIeC8sZPmSx7IdRQXjFJdK-ioxFf739eHV1ocC2w7QN8_VfUfEeJ2JQXuGWUz2ZQrwfHcBrmCil0t-116n54UTojKSJ3HpmpN8FsaPnnJKFswxe9H-79HfNPkrRw",
-					Referer:
-						"https://expert-bassoon-wrrvqqxp4qvf9w74-8000.app.github.dev/api/blocknotes/1",
-					"Referrer-Policy": "same-origin",
-				},
-				body: '{\n    "id": 1,\n    "title": "Test Post 4",\n    "user_id": "terry_ced",\n    "content": [\n        {\n            "children": [],\n            "content": [\n                {\n                    "styles": {},\n                    "text": "Welcome to this demo!",\n                    "type": "text"\n                }\n            ],\n            "id": "bf9b0d1a-ac89-4f1d-b878-8d10d33e4cc1",\n            "props": {\n                "backgroundColor": "default",\n                "textAlignment": "left",\n                "textColor": "default"\n            },\n            "type": "paragraph"\n        },\n        {\n            "children": [],\n            "content": [\n                {\n                    "styles": {},\n                    "text": "This is a heading block",\n                    "type": "text"\n                }\n            ],\n            "id": "f847c3b7-c5f9-411a-9591-8f76efa5cdb8",\n            "props": {\n                "backgroundColor": "default",\n                "level": 1,\n                "textAlignment": "left",\n                "textColor": "default"\n            },\n            "type": "heading"\n        },\n        {\n            "children": [],\n            "content": [\n                {\n                    "styles": {},\n                    "text": "This is a paragraph block",\n                    "type": "text"\n                }\n            ],\n            "id": "92fe4990-e986-470e-80ed-e307350f255f",\n            "props": {\n                "backgroundColor": "default",\n                "textAlignment": "left",\n                "textColor": "default"\n            },\n            "type": "paragraph"\n        },\n        {\n            "children": [],\n            "content": [],\n            "id": "cdcf8ff5-46dd-48b2-b322-59c40335ada0",\n            "props": {\n                "backgroundColor": "default",\n                "textAlignment": "left",\n                "textColor": "default"\n            },\n            "type": "paragraph"\n        },\n        {\n            "children": [],\n            "content": [],\n            "id": "d35b172b-ba91-4f02-8f91-d7218338160c",\n            "props": {\n                "backgroundColor": "default",\n                "textAlignment": "left",\n                "textColor": "default"\n            },\n            "type": "paragraph"\n        }\n    ],\n    "created": "2024-06-13T14:39:33.246859Z"\n}',
-				method: "PUT",
-			}
-		);
+		const myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+
+		const raw = JSON.stringify({"title":"Test Post 6","user_id": "terry_coolio","content": liveBlockyData.editorContent});
+
+		fetch("http://localhost:8000/api/blocknotes/1", {
+			method: "PUT",
+			headers: myHeaders,
+			body: raw,
+			redirect: "follow",
+		})
+			.then((response) => response.text())
+			.then((result) => console.log("ATTEMPTED TO SAVE: ", result))
+			.catch((error) => console.log("error", error));
 	}
 
 	async function loadFromStorage() {
@@ -72,14 +56,11 @@ const BlockNote = () => {
 
 		// Gets the previously stored editor contents.
 		// const storageString = localStorage.getItem("editorContent");
-		fetch(
-			"https://expert-bassoon-wrrvqqxp4qvf9w74-8000.app.github.dev/api/blocknotes?format=json",
-			{
-				method: "GET",
-				headers: myHeaders,
-				redirect: "follow",
-			}
-		)
+		fetch("http://localhost:8000/api/blocknotes/?format=json", {
+			method: "GET",
+			headers: myHeaders,
+			redirect: "follow",
+		})
 			.then((response) => response.json())
 			.then((result) => {
 				console.log("fetched result:", result[0].content);
