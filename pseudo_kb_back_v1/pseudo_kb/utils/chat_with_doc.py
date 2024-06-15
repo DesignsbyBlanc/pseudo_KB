@@ -1,6 +1,7 @@
 import requests
+import google.generativeai as genai
 
-
+genai.configure(api_key="AIzaSyCzqP5RBjt-371znEmypXHCoFtfBaSoKLI")
 
 # Create the model
 # See https://ai.google.dev/api/python/google/generativeai/GenerativeModel
@@ -40,6 +41,7 @@ for block in content_from_doc:
     text_from_doc.append(block["content"][0]["text"])
 
 print(text_from_doc)
+print()
 
 
 chat_session = model.start_chat(
