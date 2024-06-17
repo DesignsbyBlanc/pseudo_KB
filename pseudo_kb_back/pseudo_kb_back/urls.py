@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from Articles import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("api/blocknotes/", views.BlockNoteListCreateAPIView.as_view()),
+    path("api/blocknotes/<int:pk>",
+         views.BlockNoteRetrieveUpdateDestroyAPIView.as_view())
 ]
