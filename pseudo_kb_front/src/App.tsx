@@ -1,10 +1,13 @@
-import { BlockNoteLoad } from "./_components/BlockNote";
+// import { BlockNoteLoad } from "./_components/BlockNote";
 // import Hero from "./_components/Hero"
+
+import DashBoard from "./_components/DashBoard";
 
 function App() {
 	return (
 		<>
-			<BlockNoteLoad />
+			{/* <BlockNoteLoad /> */}
+			<DashBoard />
       
 		</>
 	);
