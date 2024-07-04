@@ -5,29 +5,14 @@ import "@blocknote/mantine/style.css";
 import { useEffect, useMemo, useState } from "react";
 
 import "./styles.css";
-import Hero from "../Hero";
-import Header from "../_Parts/Headers";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const initBlockyData = {
-	id: "bf9b0d1a-ac89-4f1d-b878-8d10d33e4cc1",
-	type: "paragraph",
-	props: {
-		textColor: "default",
-		backgroundColor: "default",
-		textAlignment: "left",
-	},
-	content: [
-		{
-			type: "text",
-			text: "",
-			styles: {},
-		},
-	],
-	children: [],
-};
 const BlockNoteLoad = () => {
 	const [liveBlockyData, setLiveBlockyData] = useState({ editorContent: {} });
-	const [savedBlockyData, setSavedBlockyData] = useState([initBlockyData]);
+	const [savedBlockyData, setSavedBlockyData] = useState<
+		Block[] | undefined
+	>();
+	const [loading, setLoading] = useState(true);
 
 	async function saveToStorage(jsonBlocks: Block[]) {
 		// Save contents to local storage. You might want to debounce this or replace
@@ -69,27 +54,33 @@ const BlockNoteLoad = () => {
 			headers: myHeaders,
 			redirect: "follow",
 		})
-			.then((response) => response.json())
+			.then(async (response) => await response.json())
 			.then((result) => {
 				console.log("fetched result:", result[0].content);
 				setSavedBlockyData(result[0].content);
 				console.log("Blocknote Data:", savedBlockyData);
+				setLoading(false);
 			})
 			.catch((error) => console.error(error));
-		return savedBlockyData[1].id ? savedBlockyData : undefined;
+		return !loading ? savedBlockyData : undefined;
 	}
 
 	const [initialContent, setInitialContent] = useState<
-		PartialBlock[] | undefined | "loading"
+		PartialBlock[] | undefined | "loading" | Block[]
 	>("loading");
 
 	// Loads the previously stored editor contents.
 	useEffect(() => {
 		loadFromStorage().then((content) => {
-			console.log("INITIAL CONTENT: ", content);
-			setInitialContent(content);
+			if (content === undefined) {
+				console.log("loading", content);
+				setInitialContent("loading");
+			} else {
+				console.log("INITIAL CONTENT: ", content);
+				setInitialContent(savedBlockyData);
+			}
 		});
-	}, []);
+	}, [loading]);
 
 	// Creates a new editor instance.
 	// We use useMemo + createBlockNoteEditor instead of useCreateBlockNote so we
@@ -104,91 +95,29 @@ const BlockNoteLoad = () => {
 	if (editor === undefined) {
 		return (
 			<>
-				{/* <Hero /> */}
-				{/* <a
-					href="#"
-					onClick={() => {
-						loadFromStorage().then((content) => {
-							console.log("INITIAL CONTENT: ", content);
-							setInitialContent(content);
-						});
-					}}
-					className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-				>
-					Load Last Document
-				</a> */}
-
-				<Header />
-
-				<div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-					<div className="hidden sm:mb-8 sm:flex sm:justify-center">
-						<div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-							Announcing our next round of funding.{" "}
-							<a
-								href="#"
-								className="font-semibold text-indigo-600"
-							>
-								<span
-									className="absolute inset-0"
-									aria-hidden="true"
-								/>
-								Read more <span aria-hidden="true">&rarr;</span>
-							</a>
-						</div>
-					</div>
-					<div className="text-center">
-						<h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-							Data to enrich your online business
-						</h1>
-						<p className="mt-6 text-lg leading-8 text-gray-600">
-							Anim aute id magna aliqua ad ad non deserunt sunt.
-							Qui irure qui lorem cupidatat commodo. Elit sunt
-							amet fugiat veniam occaecat fugiat aliqua.
-						</p>
-						<div className="mt-10 flex items-center justify-center gap-x-6">
-							<a
-								onClick={() => {
-									loadFromStorage().then((content) => {
-										console.log(
-											"INITIAL CONTENT: ",
-											content
-										);
-										setInitialContent(content);
-									});
-								}}
-								className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-							>
-								Load last document
-							</a>
+				<div className="py-36 ">
+					<div className="flex flex-col space-y-3">
+						<Skeleton className="h-[125px] w-4/5 rounded-xl mx-auto" />
+						<div className="space-y-2 mx-auto">
+							<Skeleton className="h-4 w-48 lg:w-[40rem] md:w-[30rem]" />
+							<Skeleton className="h-4 w-36 lg:w-[30rem] md:w-[20rem]" />
 						</div>
 					</div>
 				</div>
-
-				{/* <button
-					onClick={() => {
-						loadFromStorage().then((content) => {
-							console.log("INITIAL CONTENT: ", content);
-							setInitialContent(content);
-						});
-					}}
-				>
-					{" "}
-					Load last document
-				</button> */}
 			</>
 		);
 	}
 
 	// Renders the editor instance.
 	return (
-		<div>
+		<div className="py-24 sm:py-32 lg:py-36">
 			<BlockNoteView
+				data-theming-css-demo
 				editor={editor}
 				onChange={() => {
 					saveToStorage(editor.document);
 				}}
 			/>
-			<hr style={{ padding: "20 rem" }}></hr>
 		</div>
 	);
 };

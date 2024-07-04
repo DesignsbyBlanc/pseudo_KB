@@ -1,31 +1,6 @@
-.wrapper {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-}
 
-.item {
-	border-radius: 0.5rem;
-	flex: 1;
-	overflow: hidden;
-}
 
-.item.bordered {
-	border: 1px solid gray;
-}
+.bn-container[data-theming-css-demo] .bn-editor {
+	@apply min-h-screen h-full py-6 bg-inherit backdrop-blur-3xl shadow-2xl text-black
 
-.item pre {
-	border-radius: 0.5rem;
-	height: 100%;
-	overflow: auto;
-	padding-block: 1rem;
-	padding-inline: 54px;
-	width: 100%;
-	white-space: pre-wrap;
-}
-
-button {
-    border-color: aquamarine;
-    border: 5px;
-    background-color: aqua;
 }
