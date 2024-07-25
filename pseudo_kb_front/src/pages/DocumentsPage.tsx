@@ -13,7 +13,7 @@ const DocumentsPage = () => {
 							onClick={() => {
 								setLoadDocument(true);
 							}}
-							className="rounded-md bg-neutral-200/50 px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 backdrop-blur-xl hover:text-white"
+							className="rounded-md bg-red-200/50 px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400 backdrop-blur-xl hover:text-white"
 						>
 							<img
 								src="https://www.svgrepo.com/download/515954/documents.svg"

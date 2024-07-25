@@ -7,12 +7,21 @@ import { useEffect, useMemo, useState } from "react";
 import "./styles.css";
 import { Skeleton } from "@/components/ui/skeleton";
 
+const initBlockData = [
+	{
+		type: "paragraph",
+		content: "Welcome to this demo!",
+	},
+];
+
 const BlockNoteLoad = () => {
-	const [liveBlockyData, setLiveBlockyData] = useState({ editorContent: {} });
+	const [liveBlockyData, setLiveBlockyData] = useState(initBlockData);
 	const [savedBlockyData, setSavedBlockyData] = useState<
 		Block[] | undefined
 	>();
 	const [loading, setLoading] = useState(true);
+
+	const SAVE_INTERVAL = 10000;
 
 	async function saveToStorage(jsonBlocks: Block[]) {
 		// Save contents to local storage. You might want to debounce this or replace
@@ -94,23 +103,50 @@ const BlockNoteLoad = () => {
 
 	if (editor === undefined) {
 		return (
-			<>
-				<div className="py-36 ">
-					<div className="flex flex-col space-y-3">
-						<Skeleton className="h-[125px] w-4/5 rounded-xl mx-auto" />
-						<div className="space-y-2 mx-auto">
-							<Skeleton className="h-4 w-48 lg:w-[40rem] md:w-[30rem]" />
-							<Skeleton className="h-4 w-36 lg:w-[30rem] md:w-[20rem]" />
-						</div>
+			<div className="py-36 ">
+				<div className="flex flex-col space-y-3">
+					<Skeleton className="h-[125px] w-4/5 rounded-xl mx-auto" />
+					<div className="space-y-2 mx-auto">
+						<Skeleton className="h-4 w-48 lg:w-[40rem] md:w-[30rem]" />
+						<Skeleton className="h-4 w-36 lg:w-[30rem] md:w-[20rem]" />
 					</div>
 				</div>
-			</>
+			</div>
 		);
 	}
 
 	// Renders the editor instance.
 	return (
 		<div className="py-24 sm:py-32 lg:py-36">
+			<div className="grid grid-cols-8">
+				<div className="col-span-8 justify-self-end">
+					<a
+						onClick={() => {
+							saveToStorage(editor.document);
+						}}
+						className="rounded-t-md text-center  bg-lime-400/10 px-3.5 py-2.5 text-sm font-semibold text-black/10 shadow-sm hover:bg-lime-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400 backdrop-blur-xl hover:text-white"
+					>
+						save
+					</a>
+					
+					
+					<a
+						onClick={() => {
+							setLiveBlockyData({
+								editorContent: initBlockData,
+							});
+							console.log(
+								"MANUAL SAVE:",
+								liveBlockyData.editorContent
+							);
+						}}
+						className="rounded-t-md text-center  bg-red-400/10 px-3.5 py-2.5 text-sm font-semibold text-black/10 shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400 backdrop-blur-xl hover:text-white"
+					>
+						delete
+					</a>
+					
+				</div>
+			</div>
 			<BlockNoteView
 				data-theming-css-demo
 				editor={editor}

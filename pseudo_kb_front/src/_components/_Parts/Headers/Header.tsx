@@ -23,7 +23,7 @@ const Header = () => {
 						<span className="sr-only">Your Company</span>
 						<img
 							className="h-8 w-auto"
-							src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+							src="/icons/Browser/BrowserIcon.svg"
 							alt=""
 						/>
 					</Link>
@@ -43,7 +43,7 @@ const Header = () => {
 						<Link
 							key={item.name}
 							to={item.href}
-							className="text-sm font-semibold leading-6 text-gray-900 hover:bg-indigo-600 hover:rounded-md py-2.5 px-3.5 hover:text-white"
+							className="text-sm font-semibold leading-6 text-gray-900 hover:bg-red-400 hover:rounded-md py-2.5 px-3.5 hover:text-white"
 						>
 							{item.name}
 						</Link>
@@ -66,14 +66,14 @@ const Header = () => {
 				<div className="fixed inset-0 z-50" />
 				<DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto backdrop-blur-xl shadow-xl px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
 					<div className="flex items-center justify-between">
-						<a href="#" className="-m-1.5 p-1.5">
+						<Link to="/" className="-m-1.5 p-1.5">
 							<span className="sr-only">Your Company</span>
 							<img
 								className="h-8 w-auto"
-								src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+								src="/icons/Browser/BrowserIcon.svg"
 								alt=""
 							/>
-						</a>
+						</Link>
 						<button
 							type="button"
 							className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -90,7 +90,7 @@ const Header = () => {
 									<a
 										key={item.name}
 										href={item.href}
-										className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+										className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-red-50"
 									>
 										{item.name}
 									</a>
@@ -99,7 +99,7 @@ const Header = () => {
 							<div className="py-6">
 								<a
 									href="#"
-									className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+									className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-red-50"
 								>
 									Log in
 								</a>

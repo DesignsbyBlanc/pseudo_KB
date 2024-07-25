@@ -16,7 +16,7 @@ const Hero = () => {
 							Announcing our next round of funding.{" "}
 							<a
 								href="#"
-								className="font-semibold text-indigo-600"
+								className="font-semibold text-red-400"
 							>
 								<span
 									className="absolute inset-0"
@@ -38,7 +38,7 @@ const Hero = () => {
 						<div className="mt-10 flex items-center justify-center gap-x-6">
 							<Link
 								to="/documents"
-								className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+								className="rounded-md bg-red-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 							>
 								Get started
 							</Link>
